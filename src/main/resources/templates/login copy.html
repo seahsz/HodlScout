@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | HodlScout</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body class="container">
+
+    <div class="login-form">
+
+        <h1>Log In</h1>
+
+        <form method="POST" action="/login" th:object="${user}">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Username</td>
+                        <td>
+                            <input type="text" th:field="*{username}">
+                        </td>
+                        <td th:if="${#fields.hasErrors('username')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('username')}" th:text="${err}"></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>
+                            <input type="text" th:field="*{password}">
+                        </td>
+                        <td th:if="${#fields.hasErrors('password')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('password')}" th:text="${err}"></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit">Log In</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+        <div>
+            <a href="/signup">Need an account? Sign Up</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

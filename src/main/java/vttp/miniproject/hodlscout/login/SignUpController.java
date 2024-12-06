@@ -1,4 +1,4 @@
-package vttp.miniproject.hodlscout.controllers;
+package vttp.miniproject.hodlscout.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
-
-import vttp.miniproject.hodlscout.models.User;
-import vttp.miniproject.hodlscout.services.LoginService;
 
 import static vttp.miniproject.hodlscout.utilities.Constants.*;
 
@@ -25,13 +22,13 @@ public class SignUpController {
     @GetMapping
     public String getSignUp(Model model) {
 
-        model.addAttribute(TH_USER, new User());
+        model.addAttribute(TH_USER, new UserModel());
 
         return "signup";
     }
 
     @PostMapping
-    public String postSignUp(@Valid User newUser, BindingResult binding) {
+    public String postSignUp(@Valid UserModel newUser, BindingResult binding) {
 
         if(binding.hasErrors())
             return "signup";

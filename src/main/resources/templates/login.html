@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | HodlScout</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4c99ffbb83.js" crossorigin="anonymous"></script>
+
 </head>
+
 <body>
 
-    <h1>Log In</h1>
+    <div class="login">
+            <h2 class="login_heading">Log In</h2>
 
-    <form method="POST" action="/login">
-        <table>
-            <tbody>
-                <tr>
-                    <td>Username</td>
-                    <td>
-                        <input type="text" name="username">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td>
-                        <input type="text" name="password">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit">Log In</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-    
+            <form method="POST" action="/login" th:object="${user}">
+                <div class="login_input-container">
+                    <i class="login_icon fa-solid fa-user"></i>
+
+                    <input type="text" th:field="*{username}" placeholder="Username"
+                    th:classappend="${#fields.hasErrors('username')} ? 'login_input--error' : ''" class="login_input">
+
+                    <div th:if="${#fields.hasErrors('username')}" class="login_error_group">
+                        <i class="login_error_icon fa-solid fa-exclamation"></i>
+                        <span th:errors="*{username}" class="login_error_text"></span>
+                    </div>
+
+                </div>
+                <div class="login_input-container">
+                    <i class="login_icon fa-solid fa-lock"></i>
+                    <input type="text" th:field="*{password}" placeholder="Password"
+                    th:classappend="${#fields.hasErrors('password')} ? 'login_input--error' : ''" class="login_input">
+
+                    <div th:if="${#fields.hasErrors('password')}" class="login_error_group">
+                        <i class="login_error_icon fa-solid fa-exclamation"></i>
+                        <span th:errors="*{password}" class="login_error_text"></span>
+                    </div>
+                </div>
+                <button type="submit" class="login_button">Log In</button>
+            </form>
+
+            <div class="login_signup">
+                <a href="/signup" class="login_signup_link">Need an account? Sign Up</a>
+            </div>
+    </div>
+
 </body>
+
 </html>

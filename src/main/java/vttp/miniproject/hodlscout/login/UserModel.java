@@ -1,10 +1,10 @@
-package vttp.miniproject.hodlscout.models;
+package vttp.miniproject.hodlscout.login;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public class User {
+public class UserModel {
 
     // Username all set to Lower Case [Case Insensitive]
 
