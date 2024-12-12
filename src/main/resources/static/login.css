@@ -12,17 +12,37 @@ body {
     background-color: #f5f5f5;
 }
 
-
-.login {
+/* Container for login and logo */
+.login_container {
+    display: flex;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Floating effect */
+    overflow: hidden; /* Ensures clean edges */
+    max-width: 800px;
+}
+
+/* Logo section */
+.login_logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f9fafb; /* Slightly lighter tone for distinction */
+}
+
+.login_logo_image {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Login form section */
+.login_area {
+    flex: 1;
     padding: 2rem;
     text-align: center;
-
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle floating effect */
-
-    width: 100%;
-    max-width: 400px;
 }
 
 .login_heading {
@@ -36,6 +56,10 @@ body {
     margin-bottom: 1rem;
 }
 
+.login_input_group {
+    position: relative;
+}
+
 .login_input {
     width: 100%;
     padding: 10px 10px 10px 40px;
@@ -44,7 +68,6 @@ body {
     border-radius: 5px; /* subtle rounding */
     outline: none;
     box-sizing: border-box;
-    position: relative;
 }
 
 .login_input:focus {
@@ -55,10 +78,10 @@ body {
 .login_icon {
     position: absolute;
     top: 50%;
+    left: 2%;
     transform: translateY(-50%);
-    left: 5%;
     color: #bbb;
-    font-size: 18px;
+    height: 60%;
 }
 
 /* Error styling for the input fields */
@@ -73,25 +96,44 @@ body {
     align-items: center;
     font-size: 0.875rem;  /* Smaller font for error message */
     color: #ef4444;  /* Red color for error message */
-    margin-top: 0.5rem;
 }
 
 .login_error_icon {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 1.25rem;
+    /* width: 1.25rem; */
     height: 1.25rem;
     color: #ef4444;
     font-weight: bold;
     font-size: 1rem;
     margin-right: 0.5rem;  /* Space between icon and text */
+    flex-shrink: 0;
+    margin-top: 1px;
 }
 
 .login_error_text {
-    margin-left: 0.5rem;
+    word-wrap: break-word;
+    text-align: left;
 }
 
+.login_error_group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Remove default list styling */
+}
+
+.login_error_item {
+    display: flex;
+    align-items: flex-start; /* Ensure top alignment between icon and multi line text */
+    margin-bottom: 0.25rem; /* Space between errors */
+}
+
+.login_error_item:last-child {
+    margin-bottom: 0; /* Remove margin from the last error item */
+}
+
+/* for login button */
 .login_button {
     background-color: #38b2ac;
     color: white;
@@ -109,6 +151,7 @@ body {
     background-color: #2c7a7b; /* Teal 700 */
 }
 
+/* for signup_link */
 .login_signup {
     margin-top: 1rem;
     font-size: 0.875rem;

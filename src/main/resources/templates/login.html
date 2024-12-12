@@ -7,46 +7,84 @@
     <title>Login | HodlScout</title>
     <link rel="stylesheet" href="login.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/4c99ffbb83.js" crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
 
 </head>
 
 <body>
+    <div class="login_container">
 
-    <div class="login">
+        <div class="login_logo">
+            <img src="/images/hodlScoutLogo.png" alt="HodlScout Logo" class="login_logo_image">
+        </div>
+
+        <div class="login_area">
             <h2 class="login_heading">Log In</h2>
 
             <form method="POST" action="/login" th:object="${user}">
                 <div class="login_input-container">
-                    <i class="login_icon fa-solid fa-user"></i>
+                    <div class="login_input_group">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="login_icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
 
-                    <input type="text" th:field="*{username}" placeholder="Username"
-                    th:classappend="${#fields.hasErrors('username')} ? 'login_input--error' : ''" class="login_input">
+                        <input type="text" th:field="*{username}" placeholder="Username"
+                            th:classappend="${#fields.hasErrors('username')} ? 'login_input--error' : ''"
+                            class="login_input">
+                    </div>
 
                     <div th:if="${#fields.hasErrors('username')}" class="login_error_group">
-                        <i class="login_error_icon fa-solid fa-exclamation"></i>
-                        <span th:errors="*{username}" class="login_error_text"></span>
+                        <ul>
+                            <li th:each="err : ${#fields.errors('username')}" class="login_error_item">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="login_error_icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                </svg>
+                                <span th:text="${err}" class="login_error_text"></span>
+                            </li>
+                        </ul>
                     </div>
-
                 </div>
+
                 <div class="login_input-container">
-                    <i class="login_icon fa-solid fa-lock"></i>
-                    <input type="text" th:field="*{password}" placeholder="Password"
-                    th:classappend="${#fields.hasErrors('password')} ? 'login_input--error' : ''" class="login_input">
-
+                    <div class="login_input_group">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="login_icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                        </svg>
+                        <input type="text" th:field="*{password}" placeholder="Password"
+                            th:classappend="${#fields.hasErrors('password')} ? 'login_input--error' : ''"
+                            class="login_input">
+                    </div>
                     <div th:if="${#fields.hasErrors('password')}" class="login_error_group">
-                        <i class="login_error_icon fa-solid fa-exclamation"></i>
-                        <span th:errors="*{password}" class="login_error_text"></span>
+                        <ul>
+                            <li th:each="err : ${#fields.errors('password')}" class="login_error_item">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="login_error_icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                </svg>
+                                <span th:text="${err}" class="login_error_text"></span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
                 <button type="submit" class="login_button">Log In</button>
             </form>
 
             <div class="login_signup">
                 <a href="/signup" class="login_signup_link">Need an account? Sign Up</a>
             </div>
+        </div>
     </div>
-
 </body>
 
 </html>
