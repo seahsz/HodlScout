@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage | HodlScout</title>
+    <link rel="stylesheet" href="homepage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+</head>
+
+<body>
+
+    <h1>Current Cryptocurrency Prices by Market Cap</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>24%</th>
+                    <th>Market Cap</th>
+                    <th>Volume(24h)</th>
+                    <th>Circulating Supply</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="coin : ${coins}" th:object="${coin}">
+                    <td th:text="*{marketCapRank}"></td>
+                    <td>
+                        <img th:src="*{image}" class="coin-logo">
+                        <span th:text="*{name}" class="crypto-name"></span>
+                        <span th:text="*{symbol}" class="crypto-symbol"></span>
+                    </td>
+                    <td th:text="'$' + *{currentPrice}"></td>
+                    <td th:text="*{priceChangePercentage24h} + '%'"></td>
+                    <td th:text="'$' + *{marketCap}"></td>
+                    <td th:text="'$' + *{totalVolume}"></td>
+                    <td th:text="*{circulatingSupply} + ' ' + *{symbol}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination control -->
+    <div>
+        <a th:if="${currentPage gt 1}" th:href="@{/(page=${currentPage - 1})}">Previous</a>
+        <span th:text="'Page ' + ${currentPage} + ' of ' + ${totalPages}"></span>
+        <a th:if="${currentPage lt totalPages}" th:href="@{/(page=${currentPage + 1})}">Next</a>
+    </div>
+
+</body>
+
+</html>
