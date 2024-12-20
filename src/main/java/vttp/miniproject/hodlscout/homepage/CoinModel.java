@@ -13,7 +13,7 @@ public class CoinModel {
     private String marketCap;
     private int marketCapRank;
     private String totalVolume;
-    private String priceChangePercentage24h;
+    private String priceChange;
     private String circulatingSupply;
 
     public String getSymbol() { return symbol; }
@@ -37,14 +37,14 @@ public class CoinModel {
     public String getTotalVolume() { return totalVolume; }
     public void setTotalVolume(String totalVolume) { this.totalVolume = totalVolume; }
 
-    public String getPriceChangePercentage24h() { return priceChangePercentage24h; }
-    public void setPriceChangePercentage24h(String priceChangePercentage24h) { this.priceChangePercentage24h = priceChangePercentage24h; }
+    public String getPriceChange() { return priceChange; }
+    public void setPriceChange(String priceChange) { this.priceChange = priceChange; }
 
     public String getCirculatingSupply() { return circulatingSupply; }
     public void setCirculatingSupply(String circulatingSupply) { this.circulatingSupply = circulatingSupply; }
     
     public CoinModel(String symbol, String name, String image, String currentPrice, String marketCap, int marketCapRank,
-        String totalVolume, String priceChangePercentage24h, String circulatingSupply) {
+        String totalVolume, String priceChange, String circulatingSupply) {
         this.symbol = symbol;
         this.name = name;
         this.image = image;
@@ -52,7 +52,7 @@ public class CoinModel {
         this.marketCap = marketCap;
         this.marketCapRank = marketCapRank;
         this.totalVolume = totalVolume;
-        this.priceChangePercentage24h = priceChangePercentage24h;
+        this.priceChange = priceChange;
         this.circulatingSupply = circulatingSupply;
     }
 

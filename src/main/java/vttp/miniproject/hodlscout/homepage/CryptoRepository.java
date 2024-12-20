@@ -1,6 +1,5 @@
 package vttp.miniproject.hodlscout.homepage;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

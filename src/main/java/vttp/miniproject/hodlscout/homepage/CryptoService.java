@@ -205,7 +205,7 @@ public class CryptoService {
     // Format the String (of Decimal)
     private String decimalStringFormatter(String decimalAsString) {
         if (decimalAsString.equals("-"))
-            return decimalAsString;
+            return "nil";
 
         BigDecimal number = new BigDecimal(decimalAsString);
 
@@ -230,7 +230,10 @@ public class CryptoService {
         // If number is > 1
         if (numAsBigDecimal.compareTo(BigDecimal.ONE) == 1) {
             BigDecimal formattedNum = numAsBigDecimal.setScale(2, RoundingMode.HALF_EVEN);
-            return NumberFormat.getInstance().format(formattedNum);
+
+            NumberFormat formatter = NumberFormat.getInstance();
+            formatter.setMinimumFractionDigits(2);
+            return formatter.format(formattedNum);
         }
 
         else return formatToSignificantFigures(numAsBigDecimal, 5);
