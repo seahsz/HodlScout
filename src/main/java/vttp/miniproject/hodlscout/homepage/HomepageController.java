@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+
 import static vttp.miniproject.hodlscout.utilities.Constants.*;
 
 @Controller
@@ -24,15 +26,26 @@ public class HomepageController {
     @GetMapping("/")
     public String getIndex(
         @RequestParam(name = "page", defaultValue = "1") int page,
-        Model model) {
+        Model model,
+        HttpSession session) {
 
         List<CoinModel> coins = cryptoSvc.getHomepageCoinsMarket(page, pageSize);
+
+        long totalCoins = cryptoSvc.getCoinsMarketListSize();
+
+        if (session.getAttribute(SESSION_IS_LOGGED_IN) == null) {
+            session.setAttribute(SESSION_IS_LOGGED_IN, false);
+        }
 
         model.addAttribute(TH_COINS, coins);
         model.addAttribute(TH_CURRENT_PAGE, page);
         model.addAttribute(TH_PAGE_SIZE, pageSize);
         model.addAttribute(TH_TOTAL_PAGES, getTotalPages());
-
+        model.addAttribute(TH_TOTAL_COINS, totalCoins);
+        model.addAttribute(TH_COIN_START, (page - 1) * pageSize + 1);
+        model.addAttribute(TH_COIN_END, Math.min(page * pageSize, totalCoins));
+        model.addAttribute(TH_IS_LOGGED_IN, (boolean) session.getAttribute(SESSION_IS_LOGGED_IN));
+        
         return "homepage";
     }
 

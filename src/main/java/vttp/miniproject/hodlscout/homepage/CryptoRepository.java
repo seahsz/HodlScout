@@ -1,5 +1,6 @@
 package vttp.miniproject.hodlscout.homepage;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class CryptoRepository {
     // RPUSH REDIS_KEY_COINS_MARKET_CACHE coin_data
     public void cacheCoinsMarketData(List<String> coins) {
         redisTemplate.opsForList().rightPushAll(REDIS_KEY_COINS_MARKET_CACHE, coins);
-        // redisTemplate.expire(REDIS_KEY_COINS_MARKET_CACHE, Duration.ofMinutes(10));
+        redisTemplate.expire(REDIS_KEY_COINS_MARKET_CACHE, Duration.ofMinutes(10));
     }
 
     // LRANGE REDIS_KEY_COINS_MARKET_CACHE start end

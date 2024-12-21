@@ -30,23 +30,38 @@
             <form method="GET" action="/search" class="navbar-search">
                 <input type="text" name="query" placeholder="Search cryptocurrencies..." class="search-input">
                 <button type="submit" class="search-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                      </svg>                      
                 </button>
             </form>
 
             <div class="navbar-login">
-                <a href="/login" class="nav-button">Login</a>
+                <div th:unless="${isLoggedIn}">
+                    <a href="/login" class="nav-button">Login</a>
+                    <a href="/signup" class="nav-button">Sign Up</a>
+                </div>
+                <div th:if="${isLoggedIn}">
+                    <a href="/logout" class="nav-button">Logout</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <h1>Current Cryptocurrency Prices by Market Cap</h1>
+    <div class="message-container" th:if="${redirectLoginToHomepage}">
+        <p>Logged in successfully</p>
+    </div>
+
+    <div class="message-container" th:if="${redirectLogoutToHomepage}">
+        <p>Logged out successfully</p>
+    </div>  
+
+    <div class="message-container" th:if="${redirectSignupToHomepage}">
+        <p>Signed up successfully. Please login to access your watchlist and portfolio</p>
+    </div>  
 
     <div class="table-container">
+        <h1>Current Cryptocurrency Prices by Market Cap</h1>
         <table>
             <thead>
                 <tr>
@@ -87,11 +102,47 @@
     </div>
 
     <!-- Pagination control -->
-    <div>
-        <a th:if="${currentPage gt 1}" th:href="@{/(page=${currentPage - 1})}">Previous</a>
-        <span th:text="'Page ' + ${currentPage} + ' of ' + ${totalPages}"></span>
-        <a th:if="${currentPage lt totalPages}" th:href="@{/(page=${currentPage + 1})}">Next</a>
-    </div>
+     <div class="pagination-container">
+        <div class="pagination-info">
+            <p th:text="'Showing ' + ${start} + ' - ' + ${end} + ' out of ' + ${totalCoins}"></p>
+        </div>
+        <div class="pagination">
+            <span class="pagination-disabled" th:if="${currentPage eq 1}">&lt;</span>
+            <a th:if="${currentPage gt 1}"
+            th:href="@{/(page=${currentPage - 1})}">&lt;</a>
+
+            <a th:if="${currentPage gt 3}" th:href="@{/(page=1)}">1</a>
+            <span th:if="${currentPage gt 3}">...</span>
+
+            <a th:if="${currentPage gt 2}" th:href="@{/(page=${currentPage - 2})}"
+            th:text="${currentPage - 2}"></a>
+
+            <a th:if="${currentPage gt 1}" th:href="@{/(page=${currentPage - 1})}"
+            th:text="${currentPage - 1}"></a>
+
+            <a class="active" th:text="${currentPage}"></a>
+
+            <a th:if="${currentPage lt totalPages}" th:href="@{/(page=${currentPage + 1})}"
+            th:text="${currentPage + 1}"></a>
+
+            <a th:if="${currentPage lt totalPages - 1}" th:href="@{/(page=${currentPage + 2})}"
+            th:text="${currentPage + 2}"></a>
+
+            <span th:if="${currentPage lt totalPages - 3}">...</span>
+            <a th:if="${currentPage lt totalPages - 3}" th:href="@{/(page=${totalPages})}"
+            th:text="${totalPages}"></a>
+
+            <span class="pagination-disabled" th:if="${currentPage eq totalPages}">&gt;</span>
+            <a th:if="${currentPage lt totalPages}"
+            th:href="@{/(page=${currentPage + 1})}">&gt;</a>
+        </div>
+     </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 HodlScout. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 

@@ -15,7 +15,7 @@ public class UserModel {
 
     @NotNull(message = "Password cannot be empty")
     @Size(min = 8, message = "Password must be at least 8 characters")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d\\W]{8,}$",
              message = "Password must contain at least one lowercase letter, one uppercase letter, and one number")
     private String password;
 

@@ -11,6 +11,10 @@ public class LoginService {
     @Autowired
     private LoginRepository loginRepo;
 
+    public boolean hasUser(UserModel newUser) {
+        return loginRepo.hasUser(newUser);
+    }
+
     public void saveUser(UserModel newUser) {
         loginRepo.saveUser(newUser);
     }

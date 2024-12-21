@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import static vttp.miniproject.hodlscout.utilities.Constants.*;
@@ -21,7 +23,11 @@ public class SignUpController {
     private LoginService loginSvc;
 
     @GetMapping
-    public String getSignUp(Model model) {
+    public String getSignUp(Model model, HttpSession session) {
+
+        if (session.getAttribute(SESSION_IS_LOGGED_IN) != null && (boolean) session.getAttribute(SESSION_IS_LOGGED_IN)) {
+            return "redirect:/";
+        }
 
         model.addAttribute(TH_USER, new UserModel());
 
@@ -29,15 +35,25 @@ public class SignUpController {
     }
 
     @PostMapping
-    public String postSignUp(@Valid @ModelAttribute(name = "user") UserModel newUser, BindingResult binding) {
+    public String postSignUp(@Valid @ModelAttribute(name = "user") UserModel newUser, 
+                             BindingResult binding, 
+                             Model model, RedirectAttributes redirectAttr) {
+
+        // Check if username is already taken
+        // Used rejectValue instead of addError because addError removed the original value of username when 
+        // returning the view
+        if(!newUser.getUsername().isBlank() && loginSvc.hasUser(newUser)) {
+            binding.rejectValue("username", "error.username", "Username already taken");
+            return "signup";
+        }
 
         if(binding.hasErrors())
             return "signup";
 
         // Save the new username-password combination to Redis
         loginSvc.saveUser(newUser);
-
-        return "temp";
+        redirectAttr.addFlashAttribute(TH_REDIRECT_SIGNUP_TO_HOMEPAGE, true);
+        return "redirect:/";
     }
     
 }

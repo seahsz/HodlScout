@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
 import vttp.miniproject.hodlscout.login.enums.AuthenticationResult;
 
 import static vttp.miniproject.hodlscout.utilities.Constants.*;
@@ -22,7 +24,12 @@ public class LoginController {
     private LoginService loginSvc;
 
     @GetMapping
-    public String getLogin(Model model) {
+    public String getLogin(Model model, HttpSession session) {
+
+        if (session.getAttribute(SESSION_IS_LOGGED_IN) != null && (boolean) session.getAttribute(SESSION_IS_LOGGED_IN)) {
+            return "redirect:/";
+        }
+
         model.addAttribute(TH_USER, new UserModel());
         return "login";
     }
@@ -31,15 +38,16 @@ public class LoginController {
     // Note: needed to add name="user" --> if not for some reason binding cannot find the Bean even
     //      though the variable name is the same as the th:object name
     @PostMapping
-    public String postLogin(@ModelAttribute(name="user") UserModel user, BindingResult binding) {
+    public String postLogin(@ModelAttribute(name="user") UserModel user, BindingResult binding,
+                            HttpSession session, RedirectAttributes redirectAttr) {
         AuthenticationResult result = loginSvc.authenticateUser(user);
 
-        System.out.println("Password stored in User DTO is:" + user.getPassword() + "<<<<<<<<<<<<");
-
-        System.out.println(">>>>>>>>>> ENTERING SWITCH");
         switch (result) {
             case SUCCESS:
-                return "temp";
+                session.setAttribute(SESSION_IS_LOGGED_IN, true);
+                // conditional so that homepage can later display "login successful" message above
+                redirectAttr.addFlashAttribute(TH_REDIRECT_LOGIN_TO_HOMEPAGE, true);
+                return "redirect:/";
 
             case USER_NOT_FOUND:
                 binding.addError(new FieldError(TH_USER, "username", "Username does not exist"));
