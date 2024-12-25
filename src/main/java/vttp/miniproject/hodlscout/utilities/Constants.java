@@ -21,6 +21,8 @@ public class Constants {
 
     public static final String TH_IS_LOGGED_IN = "isLoggedIn";
 
+    public static final String TH_UNAUTHORIZED = "unauthorized";
+
     // Redirect Attributes
     public static final String TH_REDIRECT_LOGIN_TO_HOMEPAGE = "redirectLoginToHomepage";
 
@@ -39,5 +41,7 @@ public class Constants {
     public static final String SESSION_LOGIN_TO_HOMEPAGE = "loginToHomepage";
 
     public static final String SESSION_LOGOUT_SUCCESSFUL = "logoutSuccessful";
+
+    public static final String SESSION_USERNAME = "username";
 
 }

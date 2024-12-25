@@ -18,7 +18,7 @@ body {
 
 /* Inner Container (Constrained to Table Width) */
 .navbar-container {
-    max-width: 1800px; /* Same width as the table */
+    max-width: 1600px; /* Same width as the table */
     margin: 0 auto; /* Center the container */
     display: flex;
     align-items: center;
@@ -132,13 +132,13 @@ body {
 }
 
 /* For Login and Logout successfully message */
-.message-container {
+.message-container-success {
     margin: 2rem auto;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 1800px;
+    max-width: 1600px;
     padding: 0.5rem 1.5rem;
     border-radius: 6px;
     background-color: #e6f4e6; /* Light green background */
@@ -156,7 +156,7 @@ body {
 
 .table-container {
     margin: 2rem auto;
-    max-width: 1800px;
+    max-width: 1600px;
     background-color: white;
     border-radius: 8px;
     padding: 1.5rem;
@@ -271,7 +271,7 @@ tbody tr td:first-child {
     align-items: center;
     font-size: 14px;
     color: #555;
-    max-width: 1848px;
+    max-width: 1648px;
     width: 100%;
     margin: 0 auto;
 }

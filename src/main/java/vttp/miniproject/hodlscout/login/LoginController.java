@@ -45,6 +45,7 @@ public class LoginController {
         switch (result) {
             case SUCCESS:
                 session.setAttribute(SESSION_IS_LOGGED_IN, true);
+                session.setAttribute(SESSION_USERNAME, user.getUsername());
                 // conditional so that homepage can later display "login successful" message above
                 redirectAttr.addFlashAttribute(TH_REDIRECT_LOGIN_TO_HOMEPAGE, true);
                 return "redirect:/";

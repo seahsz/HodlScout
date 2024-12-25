@@ -48,15 +48,15 @@
         </div>
     </header>
 
-    <div class="message-container" th:if="${redirectLoginToHomepage}">
+    <div class="message-container-success" th:if="${redirectLoginToHomepage}">
         <p>Logged in successfully</p>
     </div>
 
-    <div class="message-container" th:if="${redirectLogoutToHomepage}">
+    <div class="message-container-success" th:if="${redirectLogoutToHomepage}">
         <p>Logged out successfully</p>
     </div>  
 
-    <div class="message-container" th:if="${redirectSignupToHomepage}">
+    <div class="message-container-success" th:if="${redirectSignupToHomepage}">
         <p>Signed up successfully. Please login to access your watchlist and portfolio</p>
     </div>  
 
