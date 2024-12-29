@@ -45,6 +45,12 @@ public class HomepageController {
         model.addAttribute(TH_COIN_START, (page - 1) * pageSize + 1);
         model.addAttribute(TH_COIN_END, Math.min(page * pageSize, totalCoins));
         model.addAttribute(TH_IS_LOGGED_IN, (boolean) session.getAttribute(SESSION_IS_LOGGED_IN));
+        model.addAttribute(TH_COIN_NAME_AND_ID_LIST, cryptoSvc.getCoinNameAndIdList());
+        
+        // Username to be displayed if user is logged in
+        if ((boolean) session.getAttribute(SESSION_IS_LOGGED_IN)) {
+            model.addAttribute(TH_USERNAME, (String) session.getAttribute(SESSION_USERNAME));
+        }
         
         return "homepage";
     }

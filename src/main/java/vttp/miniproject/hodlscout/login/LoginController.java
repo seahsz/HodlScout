@@ -17,13 +17,13 @@ import vttp.miniproject.hodlscout.login.enums.AuthenticationResult;
 import static vttp.miniproject.hodlscout.utilities.Constants.*;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping
 public class LoginController {
 
     @Autowired
     private LoginService loginSvc;
 
-    @GetMapping
+    @GetMapping("/login")
     public String getLogin(Model model, HttpSession session) {
 
         if (session.getAttribute(SESSION_IS_LOGGED_IN) != null && (boolean) session.getAttribute(SESSION_IS_LOGGED_IN)) {
@@ -37,7 +37,7 @@ public class LoginController {
     // No validation of input field needed per se (only happens for sign up)
     // Note: needed to add name="user" --> if not for some reason binding cannot find the Bean even
     //      though the variable name is the same as the th:object name
-    @PostMapping
+    @PostMapping("/login")
     public String postLogin(@ModelAttribute(name="user") UserModel user, BindingResult binding,
                             HttpSession session, RedirectAttributes redirectAttr) {
         AuthenticationResult result = loginSvc.authenticateUser(user);

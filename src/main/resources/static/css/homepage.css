@@ -5,7 +5,6 @@ body {
     height: 100vh;
     font-family: 'Inter', sans-serif;
     line-height: 1.5;
-
     background-color: #f5f5f5;
 }
 
@@ -18,23 +17,29 @@ body {
 
 /* Inner Container (Constrained to Table Width) */
 .navbar-container {
-    max-width: 1600px; /* Same width as the table */
-    margin: 0 auto; /* Center the container */
+    max-width: 1648px;
+    /* Same width as the table + table padding */
+    margin: 0 auto;
+    /* Center the container */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 16px; /* Padding inside the container */
+    padding: 8px 16px;
+    /* Padding inside the container */
     gap: 16px;
 }
 
+/* Search form */
 .navbar-search {
     display: flex;
     align-items: center;
-    margin: 0 16px; /* Center in the navbar */
+    margin: 0 16px;
+    /* Center in the navbar */
     flex-grow: 1;
 }
 
-.search-input {
+/* Dropdown styling */
+.search-dropdown {
     flex-basis: 300px;
     flex-grow: 1;
     padding: 8px 12px;
@@ -44,18 +49,24 @@ body {
     font-size: 14px;
     outline: none;
     transition: border-color 0.3s;
-    max-width: 1200px; /* Constrain the width */
-
+    max-width: 1200px;
+    appearance: none;
+    /* For consistent dropdown styling */
+    background-color: white;
+    color: #2d3748;
+    /* Neutral text color */
 }
 
-.search-input:focus {
-    border-color: #38b2ac; /* Teal color */
+.search-dropdown:focus {
+    border-color: #2c7a7b;
+    /* Teal color */
 }
 
 .search-button {
     font-size: 14px;
     padding: 10px 12px;
-    background-color: #38b2ac; /* Teal */
+    background-color: #2c7a7b;
+    /* Teal */
     color: white;
     border: none;
     border-top-right-radius: 8px;
@@ -67,7 +78,8 @@ body {
 }
 
 .search-button:hover {
-    background-color: #2c7a7b; /* Darker Teal */
+    background-color: #38b2ac;
+    /* Darker Teal */
 }
 
 .search-icon {
@@ -117,18 +129,81 @@ body {
 .navbar-login .nav-button {
     text-decoration: none;
     padding: 8px 16px;
-    border: 1px solid #38b2ac;
-    border-radius: 20px;
+    border: 1px solid #2c7a7b;
+    border-radius: 8px;
     color: #ffffff;
-    background-color: #38b2ac;
+    background-color: #2c7a7b;
     font-size: 16px;
     font-weight: 500;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .navbar-login .nav-button:hover {
+    background-color: #38b2ac;
+    border-color: #38b2ac;
+}
+
+/* User Section */
+.user-section {
+    text-decoration: none;
+    /* Not sure why need to reduce padding from 8 to 4px so it to look similar to login button */
+    padding: 4px 16px;
+    border: 1px solid #2c7a7b;
+    border-radius: 8px;
+    gap: 6px;
+    color: white;
     background-color: #2c7a7b;
-    border-color: #2c7a7b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-section .username {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.user-section .dropdown {
+    position: relative;
+}
+
+.user-section .dropdown-btn {
+    background: none;
+    border: none;
+    margin: 0;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+.user-section .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    color: #2c7a7b;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.user-section .dropdown-menu a {
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    color: #2c7a7b;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.user-section .dropdown-menu a:hover {
+    background-color: #f9fafb;
+}
+
+.user-section .dropdown:hover .dropdown-menu {
+    display: flex;
 }
 
 /* For Login and Logout successfully message */
@@ -139,15 +214,20 @@ body {
     justify-content: center;
     width: 100%;
     max-width: 1600px;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
-    background-color: #e6f4e6; /* Light green background */
-    border: 1px solid #38b2ac; /* Teal border to match the theme */
-    color: #2c7a7b; /* Dark teal text for contrast */
+    background-color: #e6f4e6;
+    /* Light green background */
+    border: 1px solid #38b2ac;
+    /* Teal border to match the theme */
+    color: #2c7a7b;
+    /* Dark teal text for contrast */
     text-align: center;
-    font-size: 1rem; /* Adjust font size for readability */
+    font-size: 1rem;
+    /* Adjust font size for readability */
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean, professional look */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for a clean, professional look */
 }
 
 .message-container p {
@@ -166,10 +246,13 @@ body {
 .table-container h1 {
     width: 100%;
     text-align: center;
-    font-size: 24px; /* Slightly smaller */
-    color: #2c7a7b; /* Darker teal */
+    font-size: 24px;
+    /* Slightly smaller */
+    color: #2c7a7b;
+    /* Darker teal */
     margin-bottom: 24px;
-    border-bottom: 2px solid #38b2ac; /* Subtle accent underline */
+    border-bottom: 2px solid #38b2ac;
+    /* Subtle accent underline */
     display: inline-block;
     padding-bottom: 8px;
 }
@@ -205,7 +288,8 @@ tbody tr:hover {
 }
 
 tr:nth-child(even) {
-    background-color: #f9fafb; /* Light gray for alternating rows */
+    background-color: #f9fafb;
+    /* Light gray for alternating rows */
 }
 
 td {
@@ -257,7 +341,8 @@ td {
 }
 
 .crypto-price-change.neutral {
-    color: #555; /* Neutral gray */
+    color: #555;
+    /* Neutral gray */
 }
 
 tbody tr td:first-child {
@@ -288,7 +373,8 @@ tbody tr td:first-child {
     gap: 8px;
 }
 
-.pagination a, .pagination-disabled {
+.pagination a,
+.pagination-disabled {
     flex: 1;
     text-align: center;
     display: inline-flex;
@@ -320,7 +406,8 @@ tbody tr td:first-child {
 
 /* Footer */
 footer {
-    background-color: #2c7a7b; /* Darker teal */
+    background-color: #2c7a7b;
+    /* Darker teal */
     color: white;
     text-align: center;
     padding: 16px 0;

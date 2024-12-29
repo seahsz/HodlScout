@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/individualCoin.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="/images/hodlScoutLogo.png" alt="hodlScout Logo">
+                <span class="navbar-name">HodlScout</span>
+            </div>
+
+            <nav class="navbar-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/watchlist" class="nav-link">Watchlist</a>
+            </nav>
+
+            <form method="GET" action="/search" class="navbar-search">
+                <select name="coinId" class="search-dropdown">
+                    <option value="" disabled selected>Search cryptocurrencies. Select a coin...</option>
+                    <option th:each="coin : ${coin_name_and_id_list}" th:value="${coin.id}" th:text="${coin.name}">
+                    </option>
+                </select>
+                <button type="submit" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="search-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
+            </form>
+
+            <div class="navbar-login">
+                <div th:unless="${isLoggedIn}">
+                    <a href="/login" class="nav-button">Login</a>
+                    <a href="/signup" class="nav-button">Sign Up</a>
+                </div>
+            </div>
+            <div th:if="${isLoggedIn}">
+                <!-- User Section -->
+                <div class="user-section">
+                    <!-- Display Username -->
+                    <span class="username" th:text="${username}"></span>
+                    <!-- Optional Dropdown Menu -->
+                    <div class="dropdown">
+                        <button class="dropdown-btn">
+                            <span>&#9662;</span> <!-- Downward arrow symbol -->
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <div class="content-container">
+
+        <div class="main-content">
+            <div class="back-button-container">
+                <a href="javascript:history.back()" class="back-button">Back</a>
+            </div>
+            <div class="coin-details">
+                <!-- Coin Header -->
+                <div class="coin-header">
+                    <img th:src="${coin.image}" alt="Coin Image" class="coin-image">
+                    <h1 class="coin-name" th:text="${coin.name}"></h1>
+                    <span class="coin-symbol" th:text="'(' + ${coin.symbol} + ')'"></span>
+                </div>
+
+                <!-- Current Statistics -->
+                <div class="current-statistics">
+                    <div class="stat-item">
+                        <label>Current Price</label>
+                        <p th:text="${coin.currentPrice}"></p>
+                    </div>
+                    <div class="stat-item">
+                        <label>24hr Change %</label>
+                        <p th:text="${coin.priceChangePercentage24h}"></p>
+                    </div>
+                    <div class="stat-item">
+                        <label>Market Cap</label>
+                        <p th:text="${coin.marketCap}"></p>
+                    </div>
+                    <div class="stat-item">
+                        <label>24hr Trading Volume</label>
+                        <p th:text="${coin.totalVolume}"></p>
+                    </div>
+                    <div class="stat-item">
+                        <label>Circulating Supply</label>
+                        <p th:text="${coin.circulatingSupply}"></p>
+                    </div>
+                </div>
+
+                <!-- Historical Prices -->
+                <div class="historical-prices">
+                    <div class="price-item">
+                        <h2>24h Range</h2>
+                        <p th:text="'$' + ${coin.low24h} + ' - $' + ${coin.high24h}"></p>
+                    </div>
+                    <div class="price-item">
+                        <h2>All-Time High</h2>
+                        <p th:text="'Price: $' + ${coin.ath}"></p>
+                        <p th:text="'Change: ' + ${coin.athChangePercentage} + '%'"></p>
+                        <p th:text="'Date: ' + ${coin.athDate}"></p>
+                    </div>
+                    <div class="price-item">
+                        <h2>All-Time Low</h2>
+                        <p th:text="'Price: $' + ${coin.atl}"></p>
+                        <p th:text="'Change: ' + ${coin.atlChangePercentage} + '%'"></p>
+                        <p th:text="'Date: ' + ${coin.atlDate}"></p>
+                    </div>
+                </div>
+
+                <!-- Links and Social Stats -->
+                <div class="coin-links">
+                    <a th:href="${coin.linkHomepage}" target="_blank" class="coin-link">Official Website</a>
+                    <a th:href="@{https://x.com/{twitterName}(twitterName=${coin.twitterScreenName})}" target="_blank"
+                        class="coin-link">Twitter</a>
+                    <p class="twitter-followers">
+                        Twitter Followers: <span th:text="${coin.twitterFollowers}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 HodlScout. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

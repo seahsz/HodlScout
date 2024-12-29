@@ -6,6 +6,7 @@ public class CoinModel {
     // are String.class because need to format before displaying
     // No cons as not using these "double" for any arithmetic operations
 
+    private String id;
     private String symbol;
     private String name;
     private String image;
@@ -15,6 +16,9 @@ public class CoinModel {
     private String totalVolume;
     private String priceChange;
     private String circulatingSupply;
+
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getSymbol() { return symbol; }
     public void setSymbol(String symbol) { this.symbol = symbol; }
@@ -43,8 +47,9 @@ public class CoinModel {
     public String getCirculatingSupply() { return circulatingSupply; }
     public void setCirculatingSupply(String circulatingSupply) { this.circulatingSupply = circulatingSupply; }
     
-    public CoinModel(String symbol, String name, String image, String currentPrice, String marketCap, int marketCapRank,
+    public CoinModel(String id, String symbol, String name, String image, String currentPrice, String marketCap, int marketCapRank,
         String totalVolume, String priceChange, String circulatingSupply) {
+        this.id = id;
         this.symbol = symbol;
         this.name = name;
         this.image = image;
@@ -55,6 +60,7 @@ public class CoinModel {
         this.priceChange = priceChange;
         this.circulatingSupply = circulatingSupply;
     }
+
 
 
     

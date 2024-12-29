@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error | HodlScout</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="/images/hodlScoutLogo.png" alt="hodlScout Logo">
+                <span class="navbar-name">HodlScout</span>
+            </div>
+
+            <nav class="navbar-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/watchlist" class="nav-link">Watchlist</a>
+            </nav>
+
+            <form method="GET" action="/search" class="navbar-search">
+                <select name="coinId" class="search-dropdown">
+                    <option value="" disabled selected>Search cryptocurrencies. Select a coin...</option>
+                    <option th:each="coin : ${coin_name_and_id_list}" th:value="${coin.id}" th:text="${coin.name}">
+                    </option>
+                </select>
+                <button type="submit" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="search-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
+            </form>
+
+            <div class="navbar-login">
+                <div th:unless="${isLoggedIn}">
+                    <a href="/login" class="nav-button">Login</a>
+                    <a href="/signup" class="nav-button">Sign Up</a>
+                </div>
+            </div>
+            <div th:if="${isLoggedIn}">
+                <!-- User Section -->
+                <div class="user-section">
+                    <!-- Display Username -->
+                    <span class="username" th:text="${username}"></span>
+                    <!-- Optional Dropdown Menu -->
+                    <div class="dropdown">
+                        <button class="dropdown-btn">
+                            <span>&#9662;</span> <!-- Downward arrow symbol -->
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="/logout">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <div class="content-container">
+
+        <div class="message-container">
+
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+            </div>
+
+            <h1 th:text="${custom_error_message_title}"></h1>
+            <p th:text="${custom_error_message_body}"></p>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 HodlScout. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

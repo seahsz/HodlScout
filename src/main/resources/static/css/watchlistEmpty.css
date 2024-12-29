@@ -1,0 +1,441 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    background-color: #f5f5f5;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation bar */
+.navbar {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Inner Container (Constrained to Table Width) */
+.navbar-container {
+    max-width: 1648px;
+    /* Same width as the table + table padding */
+    margin: 0 auto;
+    /* Center the container */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    /* Padding inside the container */
+    gap: 16px;
+}
+
+/* Search form */
+.navbar-search {
+    display: flex;
+    align-items: center;
+    margin: 0 16px;
+    /* Center in the navbar */
+    flex-grow: 1;
+}
+
+/* Dropdown styling */
+.search-dropdown {
+    flex-basis: 300px;
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+    max-width: 1200px;
+    appearance: none;
+    /* For consistent dropdown styling */
+    background-color: white;
+    color: #2d3748;
+    /* Neutral text color */
+}
+
+.search-dropdown:focus {
+    border-color: #2c7a7b;
+    /* Teal color */
+}
+
+.search-button {
+    font-size: 14px;
+    padding: 10px 12px;
+    background-color: #2c7a7b;
+    /* Teal */
+    color: white;
+    border: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.search-button:hover {
+    background-color: #38b2ac;
+    /* Darker Teal */
+}
+
+.search-icon {
+    width: 14px;
+    height: 14px;
+    color: white;
+}
+
+/* Logo and Name */
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 16px;
+}
+
+.navbar-logo img {
+    height: 36px;
+    width: 36px;
+}
+
+.navbar-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c7a7b;
+}
+
+/* Navigation Links */
+.navbar-links {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #2c7a7b;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #38b2ac;
+}
+
+/* Login Button */
+.navbar-login .nav-button {
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #2c7a7b;
+    border-radius: 8px;
+    color: #ffffff;
+    background-color: #2c7a7b;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.navbar-login .nav-button:hover {
+    background-color: #38b2ac;
+    border-color: #38b2ac;
+}
+
+/* User Section */
+.user-section {
+    text-decoration: none;
+    /* Not sure why need to reduce padding from 8 to 4px so it to look similar to login button */
+    padding: 4px 16px;
+    border: 1px solid #2c7a7b;
+    border-radius: 8px;
+    gap: 6px;
+    color: white;
+    background-color: #2c7a7b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-section .username {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.user-section .dropdown {
+    position: relative;
+}
+
+.user-section .dropdown-btn {
+    background: none;
+    border: none;
+    margin: 0;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+.user-section .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    color: #2c7a7b;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.user-section .dropdown-menu a {
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    color: #2c7a7b;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.user-section .dropdown-menu a:hover {
+    background-color: #f9fafb;
+}
+
+.user-section .dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+.content-container {
+    flex: 1;
+    background-color: #f5f5f5;
+}
+
+/* Crypto table */
+.table-container {
+    margin: 2rem auto;
+    max-width: 1600px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-container h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    /* Slightly smaller */
+    color: #2c7a7b;
+    /* Darker teal */
+    margin-bottom: 24px;
+    border-bottom: 2px solid #38b2ac;
+    /* Subtle accent underline */
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.table-container .cta-message {
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+}
+
+/* Watchlist Actions */
+.watchlist-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-sizing: border-box;
+    margin: 1rem 0;
+    white-space: nowrap;
+}
+
+/* Individual Action Styling */
+.action {
+    display:flex;
+    align-items: center;
+    min-width: 300px;
+}
+
+.action label {
+    font-size: 0.85rem;
+    color: #2c7a7b;
+    margin-right: 0.5rem;
+    flex: 0 0 auto;
+    /* Hides overflow text */
+    overflow: hidden; 
+    /* Adds ellipsis (...) for overflow text */
+    text-overflow: ellipsis;
+    font-weight: bold;
+}
+
+.dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-button {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    background-color: #38b2ac;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    width: 100%;
+    margin-top: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-container:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: #2c7a7b;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #38b2ac;
+    color: white;
+}
+
+.dropdown-content .current {
+    font-weight: bold;
+    color: #2c7a7b;
+}
+
+/* Dropdown for Coins */
+.coin-dropdown {
+    min-width: 100px;
+    max-width: 200px;
+    padding: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+
+}
+
+.watchlist-actions input[type="text"] {
+    padding: 0.5rem; /* Padding for input */
+    border: 1px solid #ccc; /* Border for input */
+    border-radius: 4px; /* Rounded corners */
+    flex: 1; /* Allow input to grow */
+    margin-left: 5px; /* Space between label and input */
+}
+
+/* Button Styling */
+.small-button {
+    padding: 0.5rem 1rem;
+    background-color: #38b2ac;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease;
+}
+
+.small-button:hover {
+    background-color: #2c7a7b;
+}
+
+.delete-button {
+    background-color: #e53e3e;
+}
+
+.delete-button:hover {
+    background-color: #c53030;
+}
+
+.export-button {
+    background-color: #3182ce;
+}
+
+.export-button:hover {
+    background-color: #2b6cb0;
+}
+
+/* Individual sizing control */
+.select-watchlist {
+    flex: 0 2 auto; /* Adjust this value to control the size of the select watchlist action */
+    justify-content: flex-start;
+}
+
+.create-watchlist {
+    flex: 0 2 auto; /* Adjust this value to control the size of the create watchlist action */
+}
+
+.manage-watchlist {
+    flex: 0 1 auto; /* Adjust this value to control the size of the manage watchlist action */
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.add-coin {
+    flex: 0 2 auto; /* Adjust this value to control the size of the add coin action */
+    gap: 10px;
+}
+
+
+/* Footer */
+footer {
+    background-color: #2c7a7b;
+    /* Darker teal */
+    color: white;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 14px;
+    margin-top: 24px;
+    position: relative;
+}
+
+.message-container {
+    margin: 2rem auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1600px;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    background-color: #fff0f0;
+    border: 1px solid #ef4444;
+    color: #c53030;
+    text-align: center;
+    font-size: 1rem;
+    /* Adjust font size for readability */
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for a clean, professional look */
+}
+
+.message-container p {
+    margin: 0 auto;
+}

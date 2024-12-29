@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist | HodlScout</title>
+    <link rel="stylesheet" th:href="@{/css/watchlistNoWatchlist.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="/images/hodlScoutLogo.png" alt="hodlScout Logo">
+                <span class="navbar-name">HodlScout</span>
+            </div>
+
+            <nav class="navbar-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/watchlist" class="nav-link">Watchlist</a>
+            </nav>
+
+            <form method="GET" action="/search" class="navbar-search">
+                <select name="coinId" class="search-dropdown">
+                    <option value="" disabled selected>Search cryptocurrencies. Select a coin...</option>
+                    <option th:each="coin : ${coin_name_and_id_list}" th:value="${coin.id}" th:text="${coin.name}">
+                    </option>
+                </select>
+                <button type="submit" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="search-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
+            </form>
+
+            <!-- User Section -->
+            <div class="user-section">
+                <!-- Display Username -->
+                <span class="username" th:text="${username}"></span>
+                <!-- Optional Dropdown Menu -->
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <span>&#9662;</span> <!-- Downward arrow symbol -->
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="content-container">
+        <div class="message-container">
+            <h1>No Watchlists Found</h1>
+            <p>You have no watchlists yet. Create your first watchlist now!</p>
+            <form class="create-watchlist-form" action="/watchlist/create_first" method="POST" th:object="${watchlist_form}">
+                <input type="text" th:field="*{watchlistName}" placeholder="Enter watchlist name"
+                    th:classappend="${#fields.hasErrors('watchlistName')} ? 'watchlist_input--error' : ''"
+                    class="watchlist_input">
+                <div th:if="${#fields.hasErrors('watchlistName')}" class="watchlist_error_group">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('watchlistName')}" class="watchlist_error_item">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="watchlist_error_icon">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                            </svg>
+                            <span th:text="${err}" class="watchlist_error_text"></span>
+                        </li>
+                    </ul>
+                </div>
+                <button type="submit">Create Watchlist</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 HodlScout. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

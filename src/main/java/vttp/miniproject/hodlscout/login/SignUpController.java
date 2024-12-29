@@ -16,13 +16,13 @@ import jakarta.validation.Valid;
 import static vttp.miniproject.hodlscout.utilities.Constants.*;
 
 @Controller
-@RequestMapping("/signup")
+@RequestMapping
 public class SignUpController {
 
     @Autowired
     private LoginService loginSvc;
 
-    @GetMapping
+    @GetMapping("/signup")
     public String getSignUp(Model model, HttpSession session) {
 
         if (session.getAttribute(SESSION_IS_LOGGED_IN) != null && (boolean) session.getAttribute(SESSION_IS_LOGGED_IN)) {
@@ -34,7 +34,7 @@ public class SignUpController {
         return "signup";
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public String postSignUp(@Valid @ModelAttribute(name = "user") UserModel newUser, 
                              BindingResult binding, 
                              Model model, RedirectAttributes redirectAttr) {

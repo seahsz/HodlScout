@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist | HodlScout</title>
+    <link rel="stylesheet" th:href="@{/css/watchlistEmpty.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="/images/hodlScoutLogo.png" alt="hodlScout Logo">
+                <span class="navbar-name">HodlScout</span>
+            </div>
+
+            <nav class="navbar-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/watchlist" class="nav-link">Watchlist</a>
+
+            </nav>
+
+            <form method="GET" action="/search" class="navbar-search">
+                <select name="coinId" class="search-dropdown">
+                    <option value="" disabled selected>Search cryptocurrencies. Select a coin...</option>
+                    <option th:each="coin : ${coin_name_and_id_list}" th:value="${coin.id}" th:text="${coin.name}">
+                    </option>
+                </select>
+                <button type="submit" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="search-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
+            </form>
+
+            <!-- User Section -->
+            <div class="user-section">
+                <!-- Display Username -->
+                <span class="username" th:text="${username}"></span>
+                <!-- Optional Dropdown Menu -->
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <span>&#9662;</span> <!-- Downward arrow symbol -->
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="message-container" th:if="${!#strings.isEmpty(watchlist_error_msg)}">
+        <p th:text="${watchlist_error_msg}"></p>
+    </div>
+
+    <div class="content-container">
+
+        <div class="table-container">
+
+            <div class="watchlist-actions">
+                <!-- Select Watchlist -->
+                <div class="action select-watchlist">
+                    <label for="watchlist-dropdown">Select Watchlist:</label>
+                    <div class="dropdown-container">
+                        <button id="watchlist-dropdown" class="dropdown-button">Choose</button>
+                        <div class="dropdown-content">
+                            <a th:each="watchlist : ${watchlist_name_list}"
+                                th:href="@{/watchlist/{name}(name=${watchlist})}"
+                                th:text="${watchlist == watchlist_name ? '(Current) ' + watchlist : watchlist}"
+                                th:classappend="${watchlist == watchlist_name ? 'current' : ''}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add New Watchlist -->
+                <div class="action create-watchlist">
+                    <label for="new-watchlist">Create Watchlist:</label>
+                    <form method="POST"
+                        th:action="@{/watchlist/{oldWatchlistName}/create(oldWatchlistName=${watchlist_name})}"
+                        th:object="${watchlist_form}">
+                        <input type="text" id="new-watchlist" th:field="*{watchlistName}"
+                            placeholder="New Watchlist Name">
+                        <button type="submit" class="small-button">Add</button>
+                    </form>
+                </div>
+
+                <!-- Add Coin -->
+                <div class="action add-coin">
+                    <label for="coin-dropdown">Add Coin:</label>
+                    <form method="POST" th:action="@{/watchlist/{name}/add_coin(name=${watchlist_name})}">
+                        <select id="coin-dropdown" name="coinId" class="coin-dropdown">
+                            <option th:each="coin : ${coin_name_and_id_list}" th:value="${coin.id}"
+                                th:text="${coin.name}">
+                            </option>
+                        </select>
+                        <button type="submit" class="small-button">Add</button>
+                    </form>
+                </div>
+
+
+                <div class="action manage-watchlist">
+
+                    <!-- Delete Current Watchlist -->
+                    <form method="POST" th:action="@{/watchlist/{name}/delete_watchlist(name=${watchlist_name})}">
+                        <button type="submit" class="small-button delete-button">Delete Watchlist</button>
+                    </form>
+
+                    <!-- Export Watchlist -->
+                    <form method="GET" th:action="@{/watchlist/{name}/export(name=${watchlist_name})}">
+                        <button type="submit" class="small-button export-button">Export Watchlist</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <h1 th:text="${watchlist_name}"></h1>
+            
+            <p class="cta-message">Your watchlist is empty</p>
+            <p class="cta-message">Start adding your favorite cryptocurrencies now to stay updated on their performance!</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 HodlScout. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
